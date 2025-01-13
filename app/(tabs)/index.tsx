@@ -1,74 +1,66 @@
-import { Image, StyleSheet, Platform } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-
+import { View, Text, ScrollView, Pressable, Image, useColorScheme } from 'react-native';
+import { Colors } from '@/constants/Colors';
+import { IconSymbol } from '@/components/ui/IconSymbol';
+import { useHomeStyles } from '@/styles/screens/home.styles';
+import { router } from 'expo-router';
 export default function HomeScreen() {
+  const theme = useColorScheme() ?? 'dark';
+  const styles = useHomeStyles();
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <ScrollView style={styles.container}>
+      <View style={styles.header}>
+        <View style={styles.headerTop}>
+          <View style={styles.userInfo}>
+            <Image
+              style={styles.userImage}
+              source={require('@/assets/images/user.png')}
+            />
+            <View style={styles.userTextContainer}>
+              {/* <Text style={styles.welcomeText} onPress={() => router.push('/auth/signup')}>Login</Text> */}
+              <Text style={styles.welcomeText}>Welcome back,</Text>
+              <Text style={styles.nameText}>John Doe</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.balanceCard}>
+          <Text style={styles.balanceLabel}>Total Balance</Text>
+          <Text style={styles.balanceAmount}>$12,850.00</Text>
+          <View style={styles.balanceChange}>
+            <Text style={styles.changeText}>+2.4%</Text>
+            <Text style={styles.periodText}>this month</Text>
+          </View>
+        </View>
+      </View>
+
+      <View style={styles.quickActions}>
+        <Text style={styles.sectionTitle}>Quick Actions</Text>
+        <View style={styles.actionGrid}>
+          {['Add Income', 'Add Expense', 'Transfer', 'Bills'].map((action) => (
+            <Pressable key={action} style={styles.actionItem}>
+              <View style={styles.actionIcon}>
+                <IconSymbol name="house.fill" size={24} color={Colors[theme].tint} />
+              </View>
+              <Text style={styles.actionText}>{action}</Text>
+            </Pressable>
+          ))}
+        </View>
+      </View>
+
+      <View style={styles.recentActivity}>
+        <Text style={styles.sectionTitle}>Recent Activity</Text>
+        {[1, 2, 3].map((item) => (
+          <View key={item} style={styles.activityItem}>
+            <View style={styles.activityLeft}>
+              <Text style={styles.activityTitle}>Shopping Mall</Text>
+              <Text style={styles.activityDate}>Today, 14:30</Text>
+            </View>
+            <Text style={styles.activityAmount}>-$120.00</Text>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
   );
 }
 
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
+
