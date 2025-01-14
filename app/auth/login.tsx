@@ -1,12 +1,26 @@
-import { View, Text, TextInput, Pressable, Image } from 'react-native';
-import { Link } from 'expo-router';
+import { View, Text, TextInput, Pressable, Image, Alert } from 'react-native';
+import { Link, router } from 'expo-router';
 import { useAuthStyles } from '@/styles/screens/auth.styles';
 import { useColorScheme } from '@/hooks/useColorScheme.web';
+import { useSession } from '@/context/AuthContext';
+import { useState } from 'react';
 
 export default function LoginScreen() {
     const theme = useColorScheme() ?? 'dark';
     const styles = useAuthStyles();
+    const { signIn } = useSession() ?? {};
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
+    const handleSignIn = () => {
+        // Test credentials: test@test.com / password
+        const success = signIn?.(email, password);
+        if (success) {
+            router.replace('/(tabs)');
+        } else {
+            Alert.alert('Login Failed', 'Invalid credentials. Try test@test.com / password');
+        }
+    };
     const handleGoogleLogin = () => {
         // Implement Google login logic
     };
@@ -26,6 +40,8 @@ export default function LoginScreen() {
                         placeholder="Enter your email"
                         keyboardType="email-address"
                         autoCapitalize="none"
+                        value={email}
+                        onChangeText={setEmail}
                     />
                 </View>
 
@@ -35,6 +51,8 @@ export default function LoginScreen() {
                         style={styles.input}
                         placeholder="Enter your password"
                         secureTextEntry
+                        value={password}
+                        onChangeText={setPassword}
                     />
                 </View>
 
@@ -42,7 +60,7 @@ export default function LoginScreen() {
                     <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
                 </Pressable>
 
-                <Pressable style={styles.button}>
+                <Pressable style={styles.button} onPress={handleSignIn}>
                     <Text style={styles.buttonText}>Sign In</Text>
                 </Pressable>
 

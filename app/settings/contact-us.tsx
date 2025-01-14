@@ -9,8 +9,6 @@ import { useColorScheme } from '@/hooks/useColorScheme.web';
 export default function ContactUsScreen() {
     const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('');
-    // const pan = useRef(new Animated.ValueXY()).current;
-    // const panResponder = createPanResponder(pan);
     const theme = useColorScheme() ?? 'dark';
     const styles = useSettingsStyles();
     const handleSubmit = () => {
@@ -21,10 +19,13 @@ export default function ContactUsScreen() {
 
     return (
         <View style={styles.container}>
-            {/* <Animated.View
-                style={[styles.container, { transform: [{ translateX: pan.x }] }]}
-                {...panResponder.panHandlers}
-            > */}
+            <View style={styles.header}>
+                <Pressable onPress={() => router.replace('/(tabs)/account')}>
+                    <IconSymbol name="chevron.left" size={24} color={Colors[theme].cardItem} />
+                </Pressable>
+                <Text style={styles.headerTitle}>Contact Us</Text>
+                <View style={{ width: 24 }} />
+            </View>
             <ScrollView style={styles.content}>
                 <View style={styles.contactHeader}>
                     <Text style={styles.contactsTitle}>Get in Touch</Text>
@@ -67,6 +68,7 @@ export default function ContactUsScreen() {
                             placeholder="What can we help you with?"
                             value={subject}
                             onChangeText={setSubject}
+                            placeholderTextColor={Colors[theme].icon}
                         />
                     </View>
 
@@ -79,6 +81,7 @@ export default function ContactUsScreen() {
                             numberOfLines={6}
                             value={message}
                             onChangeText={setMessage}
+                            placeholderTextColor={Colors[theme].icon}
                         />
                     </View>
 
@@ -91,7 +94,6 @@ export default function ContactUsScreen() {
                     </Pressable>
                 </View>
             </ScrollView>
-            {/* </Animated.View> */}
         </View >
     );
 }

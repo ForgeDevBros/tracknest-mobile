@@ -4,11 +4,10 @@ import { useSettingsStyles } from '@/styles/screens/settings.styles';
 import { Colors } from '@/constants/Colors';
 import { useRef, useState } from 'react';
 import { useColorScheme } from '@/hooks/useColorScheme.web';
+import { router } from 'expo-router';
 
 export default function HelpCenterScreen() {
     const [expandedSection, setExpandedSection] = useState<string | null>(null);
-    // const pan = useRef(new Animated.ValueXY()).current;
-    // const panResponder = createPanResponder(pan);
     const theme = useColorScheme() ?? 'dark';
     const styles = useSettingsStyles();
     const faqSections = [
@@ -48,10 +47,13 @@ export default function HelpCenterScreen() {
 
     return (
         <View style={styles.container}>
-            {/* <Animated.View
-                style={[styles.container, { transform: [{ translateX: pan.x }] }]}
-                {...panResponder.panHandlers}
-            > */}
+            <View style={styles.header}>
+                <Pressable onPress={() => router.replace('/(tabs)/account')}>
+                    <IconSymbol name="chevron.left" size={24} color={Colors[theme].cardItem} />
+                </Pressable>
+                <Text style={styles.headerTitle}>Help Center</Text>
+                <View style={{ width: 24 }} />
+            </View>
 
             <ScrollView style={styles.content}>
                 <View style={styles.searchSection}>
@@ -95,7 +97,6 @@ export default function HelpCenterScreen() {
                     </Pressable>
                 </View>
             </ScrollView>
-            {/* </Animated.View> */}
         </View>
     );
 }

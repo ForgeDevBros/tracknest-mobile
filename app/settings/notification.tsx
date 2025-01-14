@@ -1,8 +1,10 @@
 import { View, Text, Pressable, Switch, ScrollView } from 'react-native';
 import { useSettingsStyles } from '@/styles/screens/settings.styles';
 import { Colors } from '@/constants/Colors';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useColorScheme } from '@/hooks/useColorScheme.web';
+import { IconSymbol } from '@/components/ui/IconSymbol';
+import { router } from 'expo-router';
 
 export default function NotificationSettingsScreen() {
     const [pushEnabled, setPushEnabled] = useState(true);
@@ -14,14 +16,16 @@ export default function NotificationSettingsScreen() {
     const [securityAlerts, setSecurityAlerts] = useState(true);
     const theme = useColorScheme() ?? 'dark';
     const styles = useSettingsStyles();
-    // const pan = useRef(new Animated.ValueXY()).current;
-    // const panResponder = createPanResponder(pan);
+
     return (
         <View style={styles.container}>
-            {/* <Animated.View
-                style={[styles.container, { transform: [{ translateX: pan.x }] }]}
-                {...panResponder.panHandlers}
-            > */}
+            <View style={styles.header}>
+                <Pressable onPress={() => router.replace('/(tabs)/account')}>
+                    <IconSymbol name="chevron.left" size={24} color={Colors[theme].cardItem} />
+                </Pressable>
+                <Text style={styles.headerTitle}>Notification</Text>
+                <View style={{ width: 24 }} />
+            </View>
             <ScrollView style={styles.content}>
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>General Notifications</Text>
@@ -119,7 +123,6 @@ export default function NotificationSettingsScreen() {
                     </View>
                 </View>
             </ScrollView>
-            {/* </Animated.View> */}
         </View>
     );
 }

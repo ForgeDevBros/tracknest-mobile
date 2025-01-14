@@ -1,5 +1,6 @@
 import { View, Text, Pressable, Modal, StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
+import { usePreferenceStyles } from '@/styles/component/preference.styles';
 
 type PreferenceModalProps = {
     visible: boolean;
@@ -11,6 +12,7 @@ type PreferenceModalProps = {
 };
 
 export function PreferenceModal({ visible, title, options, selectedValue, onSelect, onClose }: PreferenceModalProps) {
+    const styles = usePreferenceStyles();
     return (
         <Modal
             visible={visible}
@@ -45,47 +47,4 @@ export function PreferenceModal({ visible, title, options, selectedValue, onSele
     );
 }
 
-const styles = StyleSheet.create({
-    modalOverlay: {
-        flex: 1,
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        justifyContent: 'flex-end',
-    },
-    modalContent: {
-        backgroundColor: Colors.light.background,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        padding: 20,
-    },
-    modalTitle: {
-        fontSize: 18,
-        fontWeight: '600',
-        marginBottom: 20,
-        textAlign: 'center',
-    },
-    optionItem: {
-        padding: 16,
-        borderBottomWidth: 1,
-        borderBottomColor: '#F5F5F5',
-    },
-    optionText: {
-        fontSize: 16,
-        color: Colors.light.text,
-    },
-    selectedOptionText: {
-        color: Colors.light.tint,
-        fontWeight: '600',
-    },
-    closeButton: {
-        marginTop: 20,
-        padding: 16,
-        backgroundColor: Colors.light.tint,
-        borderRadius: 12,
-        alignItems: 'center',
-    },
-    closeButtonText: {
-        color: Colors.light.background,
-        fontSize: 16,
-        fontWeight: '600',
-    },
-});
+

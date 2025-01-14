@@ -13,7 +13,7 @@ export const useSettingsStyles = () => {
             alignItems: 'center',
             backgroundColor: Colors[theme].tint,
             paddingHorizontal: 20,
-            paddingTop: 60,
+            paddingTop: 40,
             paddingBottom: 20,
         },
         headerTitle: {
@@ -62,7 +62,7 @@ export const useSettingsStyles = () => {
             marginBottom: 8,
         },
         input: {
-            backgroundColor: '#F5F5F5',
+            backgroundColor: `${theme === 'light' ? '#F5F5F5' : '#333'}`,
             borderRadius: 12,
             padding: 16,
             fontSize: 16,

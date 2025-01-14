@@ -15,14 +15,15 @@ export default function SecurityScreen() {
 
     const styles = useSettingsStyles();
 
-    // const pan = useRef(new Animated.ValueXY()).current;
-    // const panResponder = createPanResponder(pan);
     return (
         <View style={styles.container}>
-            {/* <Animated.View
-                style={[styles.container, { transform: [{ translateX: pan.x }] }]}
-                {...panResponder.panHandlers}
-            > */}
+            <View style={styles.header}>
+                <Pressable onPress={() => router.replace('/(tabs)/account')}>
+                    <IconSymbol name="chevron.left" size={24} color={Colors[theme].cardItem} />
+                </Pressable>
+                <Text style={styles.headerTitle}>Security</Text>
+                <View style={{ width: 24 }} />
+            </View>
             <ScrollView style={styles.content}>
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Authentication</Text>
@@ -105,7 +106,6 @@ export default function SecurityScreen() {
                     </Pressable>
                 </View>
             </ScrollView>
-            {/* </Animated.View> */}
         </View>
     );
 }

@@ -5,11 +5,12 @@ import { Colors } from '@/constants/Colors';
 import { router } from 'expo-router';
 import { useState, useEffect } from 'react';
 import { PreferenceModal } from '@/components/ui/PreferenceModal';
+import { useSession } from '@/context/AuthContext';
 
 export default function AccountScreen() {
     const theme = useColorScheme() ?? 'dark';
     const styles = useAccountStyles();
-
+    const { signOut } = useSession() ?? {};
     const [selectedCurrency, setSelectedCurrency] = useState('USD');
     const [selectedLanguage, setSelectedLanguage] = useState('English');
     const [modalType, setModalType] = useState<'currency' | 'language' | null>(null);
@@ -17,7 +18,10 @@ export default function AccountScreen() {
     const currencies = ['USD', 'EUR', 'GBP', 'JPY', 'AUD'];
     const languages = ['English', 'Spanish', 'French', 'German', 'Chinese'];
 
-
+    const handleLogout = () => {
+        signOut?.();
+        router.replace('/auth/login');
+    };
 
     return (
         <ScrollView style={styles.container}>
@@ -94,7 +98,7 @@ export default function AccountScreen() {
                     </Pressable>
                 </View>
 
-                <Pressable style={styles.logoutButton}>
+                <Pressable style={styles.logoutButton} onPress={handleLogout}>
                     <Text style={styles.logoutText}>Log Out</Text>
                 </Pressable>
             </View>

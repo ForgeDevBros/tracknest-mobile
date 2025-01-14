@@ -3,6 +3,7 @@ import { Colors } from '@/constants/Colors';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { useHomeStyles } from '@/styles/screens/home.styles';
 import { router } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 export default function HomeScreen() {
   const theme = useColorScheme() ?? 'dark';
   const styles = useHomeStyles();

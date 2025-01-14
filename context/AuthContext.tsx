@@ -1,30 +1,49 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, PropsWithChildren } from "react";
+import { useStorageState } from "../hooks/useStorageState";
 
 interface AuthContextType {
-    isAuthenticated: boolean;
-    login: () => void;
-    logout: () => void;
+    signIn: (email: string, password: string) => boolean;
+    signOut: () => void;
+    session: string | null;
+    isLoading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export function AuthProvider({ children }: { children: ReactNode }) {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+export function useSession() {
+    const value = useContext(AuthContext);
+    if (process.env.NODE_ENV !== 'production') {
+        if (!value) {
+            throw new Error('useSession must be wrapped in a <SessionProvider />');
+        }
+    }
 
-    const login = () => setIsAuthenticated(true);
-    const logout = () => setIsAuthenticated(false);
+    return value;
+}
 
+export function SessionProvider({ children }: PropsWithChildren) {
+    const [[isLoading, session], setSession] = useStorageState('session');
+    const signIn = (email: string, password: string) => {
+        // Dummy validation
+        console.log(`Signing in with email: ${email} and password: ${password}`);
+        if (email === 'test@test.com' && password === 'password') {
+            setSession(JSON.stringify({ email, token: 'dummy-token-123' }));
+            return true;
+        }
+        return false;
+    };
     return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+        <AuthContext.Provider
+            value={{
+                signIn,
+                signOut: () => {
+                    setSession(null);
+                },
+                session,
+                isLoading,
+            }}>
             {children}
         </AuthContext.Provider>
     );
 }
 
-export function useAuth() {
-    const context = useContext(AuthContext);
-    if (!context) {
-        throw new Error("useAuth must be used within an AuthProvider");
-    }
-    return context;
-}

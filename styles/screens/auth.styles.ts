@@ -36,7 +36,7 @@ export const useAuthStyles = () => {
             marginBottom: 8,
         },
         input: {
-            backgroundColor: '#F5F5F5',
+            backgroundColor: `${theme === 'light' ? '#F5F5F5' : '#333'}`,
             borderRadius: 12,
             padding: 16,
             fontSize: 16,

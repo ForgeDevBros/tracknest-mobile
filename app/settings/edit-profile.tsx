@@ -1,16 +1,21 @@
-import { View, Text, TextInput, Pressable, Image, ScrollView } from 'react-native';
+import { View, Text, TextInput, Pressable, Image, ScrollView, useColorScheme } from 'react-native';
 import { useSettingsStyles } from '@/styles/screens/settings.styles';
+import { IconSymbol } from '@/components/ui/IconSymbol';
+import { Colors } from '@/constants/Colors';
+import { router } from 'expo-router';
 
 export default function EditProfileScreen() {
-    // const pan = useRef(new Animated.ValueXY()).current;
-    // const panResponder = createPanResponder(pan);
+    const theme = useColorScheme() ?? 'dark';
     const styles = useSettingsStyles();
     return (
         <View style={styles.container}>
-            {/* <Animated.View
-                style={[styles.container, { transform: [{ translateX: pan.x }] }]}
-                {...panResponder.panHandlers}
-            > */}
+            <View style={styles.header}>
+                <Pressable onPress={() => router.replace('/(tabs)/account')}>
+                    <IconSymbol name="chevron.left" size={24} color={Colors[theme].cardItem} />
+                </Pressable>
+                <Text style={styles.headerTitle}>Edit Profile</Text>
+                <View style={{ width: 24 }} />
+            </View>
             <ScrollView style={styles.content}>
                 <View style={styles.avatarSection}>
                     <Image
@@ -28,6 +33,7 @@ export default function EditProfileScreen() {
                         <TextInput
                             style={styles.input}
                             placeholder="John Doe"
+                            placeholderTextColor={Colors[theme].icon}
                         />
                     </View>
 
@@ -36,6 +42,7 @@ export default function EditProfileScreen() {
                         <TextInput
                             style={styles.input}
                             placeholder="@johndoe"
+                            placeholderTextColor={Colors[theme].icon}
                         />
                     </View>
 
@@ -45,6 +52,7 @@ export default function EditProfileScreen() {
                             style={styles.input}
                             placeholder="john.doe@example.com"
                             keyboardType="email-address"
+                            placeholderTextColor={Colors[theme].icon}
                         />
                     </View>
 
@@ -54,6 +62,7 @@ export default function EditProfileScreen() {
                             style={styles.input}
                             placeholder="+1 234 567 890"
                             keyboardType="phone-pad"
+                            placeholderTextColor={Colors[theme].icon}
                         />
                     </View>
 
@@ -62,6 +71,7 @@ export default function EditProfileScreen() {
                         <TextInput
                             style={styles.input}
                             placeholder="New York, USA"
+                            placeholderTextColor={Colors[theme].icon}
                         />
                     </View>
 
@@ -72,6 +82,7 @@ export default function EditProfileScreen() {
                             placeholder="Tell us about yourself"
                             multiline
                             numberOfLines={4}
+                            placeholderTextColor={Colors[theme].icon}
                         />
                     </View>
 
@@ -80,7 +91,6 @@ export default function EditProfileScreen() {
                     </Pressable>
                 </View>
             </ScrollView>
-            {/* </Animated.View> */}
         </View>
     );
 }
