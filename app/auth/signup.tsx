@@ -1,14 +1,27 @@
 import { View, Text, TextInput, Pressable, Image } from 'react-native';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { useAuthStyles } from '@/styles/screens/auth.styles';
 import { useColorScheme } from '@/hooks/useColorScheme.web';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import { useSession } from '@/context/AuthContext';
+import { useState } from 'react';
 
 export default function SignupScreen() {
     const styles = useAuthStyles();
-
-    const handleGoogleSignup = () => {
-        // Implement Google Sign-in logic
+    const [isLoading, setIsLoading] = useState(false);
+    const { signIn, signInWithGoogle } = useSession() ?? {};
+    const handleGoogleSignup = async () => {
+        try {
+            setIsLoading(true);
+            const success = await signInWithGoogle?.();
+            if (success) {
+                router.replace('/(tabs)');
+            }
+        } catch (error) {
+            console.error('Google login error:', error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (

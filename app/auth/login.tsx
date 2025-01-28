@@ -8,9 +8,10 @@ import { useState } from 'react';
 export default function LoginScreen() {
     const theme = useColorScheme() ?? 'dark';
     const styles = useAuthStyles();
-    const { signIn } = useSession() ?? {};
+    const { signIn, signInWithGoogle } = useSession() ?? {};
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSignIn = () => {
         // Test credentials: test@test.com / password
@@ -18,11 +19,21 @@ export default function LoginScreen() {
         if (success) {
             router.replace('/(tabs)');
         } else {
-            Alert.alert('Login Failed', 'Invalid credentials. Try test@test.com / password');
+            Alert.alert('Login Failed', 'Invalid credentials. Please try again.');
         }
     };
-    const handleGoogleLogin = () => {
-        // Implement Google login logic
+    const handleGoogleLogin = async () => {
+        try {
+            setIsLoading(true);
+            const success = await signInWithGoogle?.();
+            if (success) {
+                router.replace('/(tabs)');
+            }
+        } catch (error) {
+            console.error('Google login error:', error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
