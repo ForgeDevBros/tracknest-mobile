@@ -111,7 +111,7 @@ export const useAuthStyles = () => {
             fontSize: 16,
             color: '#333',
             fontWeight: '500',
-        }
+        },
 
     });
 };

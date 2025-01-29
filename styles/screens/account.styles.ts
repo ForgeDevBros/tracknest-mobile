@@ -72,6 +72,7 @@ export const useAccountStyles = () => {
             padding: 16,
             alignItems: 'center',
             marginTop: 24,
+            marginBottom: 100,
         },
         logoutText: {
             color: Colors[theme].background,

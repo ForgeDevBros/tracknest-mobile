@@ -9,7 +9,7 @@ export const useHomeStyles = () => {
             backgroundColor: Colors[theme].background,
         },
         header: {
-            backgroundColor: Colors[theme].tint,
+            backgroundColor: Colors[theme].background,
             padding: 20,
             paddingTop: 60,
             paddingBottom: 40,
@@ -19,16 +19,18 @@ export const useHomeStyles = () => {
         },
         welcomeText: {
             fontSize: 16,
-            color: Colors[theme].background,
+            color: Colors[theme].text,
             opacity: 0.8,
+            fontFamily: 'Alice',
         },
         nameText: {
             fontSize: 24,
             fontWeight: 'bold',
-            color: Colors[theme].background,
+            color: Colors[theme].text,
+            fontFamily: 'Alice',
         },
         balanceCard: {
-            backgroundColor: Colors[theme].background,
+            backgroundColor: Colors[theme].cardItem,
             borderRadius: 16,
             padding: 20,
             marginBottom: -30,
@@ -36,12 +38,21 @@ export const useHomeStyles = () => {
         balanceLabel: {
             fontSize: 14,
             color: Colors[theme].icon,
+            fontFamily: 'Alice',
         },
         balanceAmount: {
             fontSize: 32,
             fontWeight: 'bold',
             color: Colors[theme].text,
             marginVertical: 8,
+            fontFamily: 'Alice',
+        },
+        actionAmmount: {
+            fontSize: 16,
+            fontWeight: 'bold',
+            color: Colors[theme].text,
+            marginVertical: 8,
+            fontFamily: 'Alice',
         },
         balanceChange: {
             flexDirection: 'row',
@@ -51,32 +62,36 @@ export const useHomeStyles = () => {
             color: '#4CAF50',
             fontWeight: '600',
             marginRight: 8,
+            fontFamily: 'Alice',
         },
         periodText: {
             color: Colors[theme].icon,
+            fontFamily: 'Alice',
         },
         quickActions: {
             padding: 20,
             marginTop: 30,
+            fontFamily: 'Alice',
         },
         sectionTitle: {
             fontSize: 18,
             fontWeight: '600',
             color: Colors[theme].text,
             marginBottom: 16,
+            fontFamily: 'Alice',
         },
         actionGrid: {
             flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
+            paddingHorizontal: 4,
         },
         actionItem: {
-            width: '48%',
+            width: 130,
             backgroundColor: Colors[theme].cardItem,
             padding: 16,
             borderRadius: 12,
-            marginBottom: 16,
+            marginRight: 12,
             alignItems: 'center',
+            fontFamily: 'Alice',
         },
         actionIcon: {
             width: 48,
@@ -86,13 +101,17 @@ export const useHomeStyles = () => {
             justifyContent: 'center',
             alignItems: 'center',
             marginBottom: 8,
+            fontFamily: 'Alice',
         },
         actionText: {
             color: Colors[theme].text,
             fontWeight: '500',
+            fontFamily: 'Alice',
         },
         recentActivity: {
             padding: 20,
+            paddingBottom: 100,
+            fontFamily: 'Alice',
         },
         activityItem: {
             flexDirection: 'row',
@@ -102,6 +121,7 @@ export const useHomeStyles = () => {
             padding: 16,
             borderRadius: 12,
             marginBottom: 12,
+            fontFamily: 'Alice',
         },
         activityLeft: {
             flex: 1,
@@ -110,6 +130,7 @@ export const useHomeStyles = () => {
             fontSize: 16,
             fontWeight: '500',
             color: Colors[theme].text,
+            fontFamily: 'Alice',
         },
         activityDate: {
             fontSize: 14,
@@ -119,15 +140,18 @@ export const useHomeStyles = () => {
         activityAmount: {
             fontSize: 16,
             fontWeight: '600',
-            color: Colors[theme].tint,
+            color: Colors[theme].text,
+            fontFamily: 'Alice',
         },
         userInfo: {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
+            fontFamily: 'Alice',
         },
         userTextContainer: {
             flex: 1,
+            fontFamily: 'Alice',
         },
         userImage: {
             width: 50,
@@ -135,5 +159,62 @@ export const useHomeStyles = () => {
             borderRadius: 25,
             marginRight: 15,
         },
+        dotsContainer: {
+            flexDirection: 'row',
+            justifyContent: 'center',
+            marginTop: 12,
+        },
+        dot: {
+            width: 6,
+            height: 6,
+            borderRadius: 3,
+            backgroundColor: Colors[theme].icon,
+            marginHorizontal: 4,
+            opacity: 0.5,
+        },
+        balanceInfo: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            fontFamily: 'Alice',
+        },
+        pieContainer: {
+            width: 100,
+            height: 100,
+        },
+        chartLabel: {
+            textAlign: 'center',
+            marginTop: 8,
+            color: Colors[theme].text,
+            fontSize: 14,
+            fontFamily: 'Alice',
+        },
+        budgetBadge: {
+            backgroundColor: '#fca55720',
+            paddingHorizontal: 12,
+            paddingVertical: 6,
+            borderRadius: 16,
+            alignSelf: 'flex-start',
+            marginTop: 8,
+        },
+        budgetText: {
+            color: '#fca557',
+            fontSize: 14,
+            fontWeight: '600',
+            fontFamily: 'Alice',
+        },
+        fab: {
+            position: 'absolute',
+            backgroundColor: Colors[theme].tint,
+            bottom: 100, // Adjust this value as needed to position above the tab bar
+            right: 20,
+            width: 60,
+            height: 60,
+            borderRadius: 30,
+            justifyContent: 'center',
+            alignItems: 'center',
+            elevation: 5,
+        },
+
     });
 };

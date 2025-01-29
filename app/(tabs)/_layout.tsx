@@ -27,12 +27,27 @@ export default function TabLayout() {
         headerTitleAlign: 'center',
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
+        tabBarItemStyle: {
+          height: 70,
+          paddingVertical: 10,
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
         tabBarStyle: Platform.select({
           ios: {
             // Use a transparent background on iOS to show the blur effect
             position: 'absolute',
           },
-          default: {},
+          default: {
+            position: 'absolute',
+            bottom: 20,
+            left: 20,
+            right: 20,
+            borderRadius: 30,
+            height: 70,
+            backgroundColor: Colors[colorScheme ?? 'light'].cardItem,
+            elevation: 5,
+          },
         }),
       }}>
       <Tabs.Screen
