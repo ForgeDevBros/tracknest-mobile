@@ -9,7 +9,7 @@ export const useAccountStyles = () => {
             backgroundColor: Colors[theme].background,
         },
         header: {
-            backgroundColor: Colors[theme].tint,
+            backgroundColor: Colors[theme].background,
             padding: 20,
             paddingTop: 60,
             alignItems: 'center',
@@ -27,12 +27,12 @@ export const useAccountStyles = () => {
         name: {
             fontSize: 24,
             fontWeight: 'bold',
-            color: Colors[theme].background,
+            color: Colors[theme].text,
             marginBottom: 4,
         },
         email: {
             fontSize: 16,
-            color: Colors[theme].background,
+            color: Colors[theme].text,
             opacity: 0.8,
         },
         content: {

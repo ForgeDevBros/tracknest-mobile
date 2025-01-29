@@ -97,6 +97,7 @@ export const useExploreStyles = () => {
         },
         trendsSection: {
             padding: 20,
+            paddingBottom: 100
         },
         trendItem: {
             marginBottom: 16,
@@ -124,5 +125,8 @@ export const useExploreStyles = () => {
             backgroundColor: Colors[theme].tint,
             borderRadius: 4,
         },
+        chartSection: {
+            padding: 20,
+        }
     });
 };

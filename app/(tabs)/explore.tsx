@@ -2,10 +2,16 @@ import { View, Text, ScrollView, TextInput, useColorScheme } from 'react-native'
 import { Colors } from '@/constants/Colors';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { useExploreStyles } from '@/styles/screens/explore.styles';
+import { BarChart, LineChart } from 'react-native-gifted-charts';
 export default function ExploreScreen() {
   const theme = useColorScheme() ?? 'dark';
   const styles = useExploreStyles();
-
+  const lineData = [
+    { value: 50, label: 'Jan' },
+    { value: 80, label: 'Feb' },
+    { value: 90, label: 'Mar' },
+    { value: 70, label: 'Apr' }
+  ];
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -21,17 +27,6 @@ export default function ExploreScreen() {
       </View>
 
       <ScrollView style={styles.content}>
-        <View style={styles.categorySection}>
-          <Text style={styles.sectionTitle}>Categories</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoriesScroll}>
-            {['Food', 'Shopping', 'Transport', 'Bills', 'Entertainment'].map((category) => (
-              <View key={category} style={styles.categoryItem}>
-                <Text style={styles.categoryText}>{category}</Text>
-              </View>
-            ))}
-          </ScrollView>
-        </View>
-
         <View style={styles.statsSection}>
           <Text style={styles.sectionTitle}>Monthly Statistics</Text>
           <View style={styles.statsGrid}>
@@ -47,6 +42,37 @@ export default function ExploreScreen() {
             </View>
           </View>
         </View>
+        <View style={styles.chartSection}>
+          <BarChart
+            data={lineData}
+            width={260}
+            frontColor={Colors[theme].text}
+            yAxisTextStyle={{ color: Colors[theme].text }}
+            xAxisLabelTextStyle={{ color: Colors[theme].text }}
+            backgroundColor={Colors[theme].background}
+          />
+        </View>
+        <View style={styles.categorySection}>
+          <Text style={styles.sectionTitle}>Categories</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoriesScroll}>
+            {['Food', 'Shopping', 'Transport', 'Bills', 'Entertainment'].map((category) => (
+              <View key={category} style={styles.categoryItem}>
+                <Text style={styles.categoryText}>{category}</Text>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
+        <View style={styles.chartSection}>
+          <LineChart
+            data={lineData}
+            width={260}
+            color={Colors[theme].text}
+            yAxisTextStyle={{ color: Colors[theme].text }}
+            xAxisLabelTextStyle={{ color: Colors[theme].text }}
+            backgroundColor={Colors[theme].background}
+          />
+        </View>
+
 
         <View style={styles.trendsSection}>
           <Text style={styles.sectionTitle}>Spending Trends</Text>

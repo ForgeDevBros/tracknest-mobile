@@ -11,18 +11,18 @@ export const useExpenseStyles = () => {
         header: {
             padding: 20,
             paddingTop: 60,
-            backgroundColor: Colors[theme].tint,
+            backgroundColor: Colors[theme].background,
         },
         headerText: {
             fontSize: 24,
             fontWeight: 'bold',
-            color: Colors[theme].cardItem,
+            color: Colors[theme].text,
             marginBottom: 8,
         },
         balanceText: {
             fontSize: 32,
             fontWeight: '600',
-            color: Colors[theme].cardItem,
+            color: Colors[theme].text,
         },
         content: {
             flex: 1,
