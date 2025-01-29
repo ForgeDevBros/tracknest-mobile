@@ -206,7 +206,7 @@ export const useHomeStyles = () => {
         fab: {
             position: 'absolute',
             backgroundColor: Colors[theme].tint,
-            bottom: 100, // Adjust this value as needed to position above the tab bar
+            bottom: 100,
             right: 20,
             width: 60,
             height: 60,
@@ -215,6 +215,19 @@ export const useHomeStyles = () => {
             alignItems: 'center',
             elevation: 5,
         },
+        headerContent: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: 16,
+        },
+        headerTitle: {
+            fontSize: 24,
+            fontWeight: 'bold',
+            color: Colors[theme].background,
+            fontFamily: 'Alice',
+        },
+
 
     });
 };

@@ -26,9 +26,13 @@ export default function HomeScreen() {
                 source={require('@/assets/images/user.png')}
               />
               <View style={styles.userTextContainer}>
-                {/* <Text style={styles.welcomeText} onPress={() => router.push('/auth/signup')}>Login</Text> */}
                 <Text style={styles.welcomeText}>Welcome back,</Text>
                 <Text style={styles.nameText}>Hussain, Rashid</Text>
+              </View>
+              <View style={styles.headerContent}>
+                <TouchableOpacity onPress={() => router.push('/Chat/penny-chat')}>
+                  <IconSymbol name="message.fill" size={30} color="white" />
+                </TouchableOpacity>
               </View>
             </View>
           </View>
