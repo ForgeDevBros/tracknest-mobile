@@ -1,74 +1,117 @@
-import { Image, StyleSheet, Platform } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-
+import { View, Text, ScrollView, Pressable, Image, useColorScheme, TouchableOpacity } from 'react-native';
+import { useHomeStyles } from '@/styles/screens/home.styles';
+import { PieChart } from 'react-native-gifted-charts';
+import { useState } from 'react';
+import { router } from 'expo-router';
+import { IconSymbol } from '@/components/ui/IconSymbol';
 export default function HomeScreen() {
+  const theme = useColorScheme() ?? 'dark';
+  const styles = useHomeStyles();
+  const [selectedSegment, setSelectedSegment] = useState({ text: 'Housing', value: 35 });
+
+  const pieData = [
+    { value: 35, text: 'Housing', color: '#FF6B6B' },
+    { value: 25, text: 'Food', color: '#4ECDC4' },
+    { value: 20, text: 'Transport', color: '#45B7D1' },
+    { value: 20, text: 'Others', color: '#96CEB4' }
+  ];
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.container}>
+      <ScrollView >
+        <View style={styles.header}>
+          <View style={styles.headerTop}>
+            <View style={styles.userInfo}>
+              <TouchableOpacity onPress={() => router.push('/Account/account')}>
+                <Image
+                  style={styles.userImage}
+                  source={require('@/assets/images/user.png')}
+                />
+              </TouchableOpacity>
+              <View style={styles.userTextContainer}>
+                <Text style={styles.welcomeText}>Welcome back,</Text>
+                <Text style={styles.nameText}>Hussain, Rashid</Text>
+              </View>
+            </View>
+          </View>
+          <View style={styles.balanceCard}>
+            <View style={styles.balanceInfo}>
+              <View>
+                <Text style={styles.balanceLabel}>Expences</Text>
+                <Text style={styles.balanceAmount}>$12,850.00</Text>
+                <View style={styles.budgetBadge}>
+                  <Text style={styles.budgetText}>$ 500 left to budget</Text>
+                </View>
+              </View>
+              <View>
+                <PieChart
+                  data={pieData}
+                  donut
+                  radius={45}
+                  innerRadius={20}
+                  focusOnPress
+                  toggleFocusOnPress
+                  onPress={(item: any, index: number) => {
+                    setSelectedSegment(pieData[index]);
+                  }}
+                />
+                <Text style={styles.chartLabel}>
+                  {selectedSegment.text}: {selectedSegment.value}%
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.quickActions}>
+          <Text style={styles.sectionTitle}>Quick Actions</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View style={styles.actionGrid}>
+              {[
+                { name: 'Housing', amount: '$2,400', change: '+2.4%' },
+                { name: 'Food', amount: '$850', change: '-1.2%' },
+                { name: 'Transport', amount: '$350', change: '+0.8%' },
+                { name: 'Shopping', amount: '$1,200', change: '+3.4%' }
+              ].map((item) => (
+                <Pressable key={item.name} style={styles.actionItem}>
+                  <Text style={styles.actionText}>{item.name}</Text>
+                  <Text style={styles.actionAmmount}>{item.amount}</Text>
+                  <Text style={[styles.changeText, { color: item.change.includes('+') ? '#4CAF50' : '#FF5252' }]}>
+                    {item.change}
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+          </ScrollView>
+          <View style={styles.dotsContainer}>
+            {[...Array(4)].map((_, index) => (
+              <View key={index} style={styles.dot} />
+            ))}
+          </View>
+        </View>
+
+
+
+        <View style={styles.recentActivity}>
+          <Text style={styles.sectionTitle}>Recent Activity</Text>
+          {[1, 2, 3].map((item) => (
+            <View key={item} style={styles.activityItem}>
+              <View style={styles.activityLeft}>
+                <Text style={styles.activityTitle}>Shopping Mall</Text>
+                <Text style={styles.activityDate}>Today, 14:30</Text>
+              </View>
+              <Text style={styles.activityAmount}>-$120.00</Text>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
+      <TouchableOpacity
+        style={styles.fab}
+        onPress={() => router.push('/')}
+      >
+        <IconSymbol name="plus" size={24} color="white" />
+      </TouchableOpacity>
+    </View>
   );
 }
 
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
+
