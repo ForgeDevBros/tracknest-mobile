@@ -21,18 +21,15 @@ export default function HomeScreen() {
         <View style={styles.header}>
           <View style={styles.headerTop}>
             <View style={styles.userInfo}>
-              <Image
-                style={styles.userImage}
-                source={require('@/assets/images/user.png')}
-              />
+              <TouchableOpacity onPress={() => router.push('/Account/account')}>
+                <Image
+                  style={styles.userImage}
+                  source={require('@/assets/images/user.png')}
+                />
+              </TouchableOpacity>
               <View style={styles.userTextContainer}>
                 <Text style={styles.welcomeText}>Welcome back,</Text>
                 <Text style={styles.nameText}>Hussain, Rashid</Text>
-              </View>
-              <View style={styles.headerContent}>
-                <TouchableOpacity onPress={() => router.push('/Chat/penny-chat')}>
-                  <IconSymbol name="message.fill" size={30} color="white" />
-                </TouchableOpacity>
               </View>
             </View>
           </View>

@@ -14,7 +14,7 @@ const MAPPING = {
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
   'dollarsign.circle.fill': 'attach-money',
-  'person.fill': 'person',
+  'person.fill': 'support-agent',
   'chevron.left': 'chevron-left',
   'plus': 'add',
   'message.fill': 'message',

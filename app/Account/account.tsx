@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Pressable, Image, useColorScheme } from 'react-native';
+import { View, Text, ScrollView, Pressable, Image, useColorScheme, TouchableOpacity } from 'react-native';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { useAccountStyles } from '@/styles/screens/account.styles';
 import { Colors } from '@/constants/Colors';

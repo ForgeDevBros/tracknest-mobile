@@ -3,7 +3,6 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { Colors } from '@/constants/Colors';
 import { router } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useChatStyles } from '@/styles/screens/chat.styles';
 import { useState } from 'react';
 
@@ -26,7 +25,7 @@ export default function PennyChatScreen() {
         <View style={styles.container}>
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => router.back()}>
-                    <IconSymbol name="chevron.left" size={24} color="white" />
+                    <IconSymbol name="chevron.left" size={24} color="black" />
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>Penny Chat</Text>
             </View>

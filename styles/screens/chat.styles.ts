@@ -11,16 +11,17 @@ export const useChatStyles = () => {
         header: {
             backgroundColor: Colors[theme].tint,
             padding: 20,
+            paddingTop: 40,
             flexDirection: 'row',
             alignItems: 'center',
             gap: 16,
         },
         headerTitle: {
-            paddingTop: 20,
             fontSize: 20,
             fontWeight: '600',
             color: Colors[theme].background,
             fontFamily: 'Alice',
+            textAlignVertical: 'center',
         },
         chatContainer: {
             flex: 1,
