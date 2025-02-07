@@ -48,7 +48,7 @@ export default function HelpCenterScreen() {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Pressable onPress={() => router.replace('/(tabs)/account')}>
+                <Pressable onPress={() => router.replace('/Account/account')}>
                     <IconSymbol name="chevron.left" size={24} color={Colors[theme].cardItem} />
                 </Pressable>
                 <Text style={styles.headerTitle}>Help Center</Text>

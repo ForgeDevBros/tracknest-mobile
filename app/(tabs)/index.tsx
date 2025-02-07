@@ -4,10 +4,13 @@ import { PieChart } from 'react-native-gifted-charts';
 import { useState } from 'react';
 import { router } from 'expo-router';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import { useSession } from '@/context/AuthContext';
 export default function HomeScreen() {
   const theme = useColorScheme() ?? 'dark';
   const styles = useHomeStyles();
   const [selectedSegment, setSelectedSegment] = useState({ text: 'Housing', value: 35 });
+  const { session } = useSession() ?? {};
+  const userData = session ? JSON.parse(session).session : null;
 
   const pieData = [
     { value: 35, text: 'Housing', color: '#FF6B6B' },
@@ -24,12 +27,12 @@ export default function HomeScreen() {
               <TouchableOpacity onPress={() => router.push('/Account/account')}>
                 <Image
                   style={styles.userImage}
-                  source={require('@/assets/images/user.png')}
+                  source={userData?.avatar ? { uri: userData.avatar } : require('@/assets/images/user.png')}
                 />
               </TouchableOpacity>
               <View style={styles.userTextContainer}>
                 <Text style={styles.welcomeText}>Welcome back,</Text>
-                <Text style={styles.nameText}>Hussain, Rashid</Text>
+                <Text style={styles.nameText}>{userData?.name || 'Guest'}</Text>
               </View>
             </View>
           </View>

@@ -10,7 +10,7 @@
       "backgroundColor": "#000000",
       "resizeMode": "contain"
     },
-    "scheme": "myapp",
+    "scheme": "com.forgedevbros.tracknest",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -21,6 +21,9 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
+    },
+    "extra": {
+      "googleClientId": "${process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID}"
     },
     "web": {
       "bundler": "metro",

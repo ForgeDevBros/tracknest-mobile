@@ -14,6 +14,8 @@ export default function AccountScreen() {
     const [selectedCurrency, setSelectedCurrency] = useState('USD');
     const [selectedLanguage, setSelectedLanguage] = useState('English');
     const [modalType, setModalType] = useState<'currency' | 'language' | null>(null);
+    const { session } = useSession() ?? {};
+    const userData = session ? JSON.parse(session).session : null;
 
     const currencies = ['USD', 'EUR', 'GBP', 'JPY', 'AUD'];
     const languages = ['English', 'Spanish', 'French', 'German', 'Chinese'];
@@ -29,10 +31,10 @@ export default function AccountScreen() {
                 <View style={styles.profileSection}>
                     <Image
                         style={styles.avatar}
-                        source={require('@/assets/images/user.png')}
+                        source={userData?.avatar ? { uri: userData.avatar } : require('@/assets/images/user.png')}
                     />
-                    <Text style={styles.name}>John Doe</Text>
-                    <Text style={styles.email}>john.doe@example.com</Text>
+                    <Text style={styles.name}>{userData?.name || 'Guest'}</Text>
+                    <Text style={styles.email}>{userData?.email || 'john.doe@example.com'}</Text>
                 </View>
             </View>
 
