@@ -112,6 +112,10 @@ export const useAuthStyles = () => {
             color: '#333',
             fontWeight: '500',
         },
+        buttonDisabled: {
+            opacity: 0.7
+        }
+
 
     });
 };
