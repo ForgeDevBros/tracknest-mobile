@@ -3,6 +3,7 @@ import { useStorageState } from "../hooks/useStorageState";
 import { supabase } from "@/lib/supabase";
 import * as WebBrowser from 'expo-web-browser';
 import { makeRedirectUri } from "expo-auth-session";
+import { authApi } from "@/services/api/auth";
 
 
 interface AuthContextType {
@@ -38,7 +39,6 @@ export function SessionProvider({ children }: PropsWithChildren) {
                     redirectTo,
                 }
             });
-
             if (error) throw error;
             if (data?.url) {
                 const result = await WebBrowser.openAuthSessionAsync(
@@ -52,11 +52,19 @@ export function SessionProvider({ children }: PropsWithChildren) {
                 if (result.type === 'success' && result.url) {
                     // Extract the access token from the URL
                     const params = new URLSearchParams(result.url.split('#')[1]);
+                    const provider_token = params.get('provider_token');
                     const access_token = params.get('access_token');
 
-                    if (access_token) {
-                        // Set the session with the token
-                        const { data: { user } } = await supabase.auth.getUser(access_token);
+                    if (access_token && provider_token) {
+                        const [validationData, { data: { user } }] = await Promise.all([
+                            authApi.googleSignIn(provider_token),
+                            supabase.auth.getUser(access_token)
+                        ]);
+                        // Check if validation was successful
+                        if (!validationData.success) {
+                            console.error('Validation failed:', validationData.message);
+                            return false;
+                        }
 
                         const minimalUserData = {
                             id: user?.id,

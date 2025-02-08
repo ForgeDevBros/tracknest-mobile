@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Pressable, Image, Alert } from 'react-native';
+import { View, Text, TextInput, Pressable, Image, Alert, ActivityIndicator } from 'react-native';
 import { Link, router } from 'expo-router';
 import { useAuthStyles } from '@/styles/screens/auth.styles';
 import { useColorScheme } from '@/hooks/useColorScheme.web';
@@ -80,18 +80,23 @@ export default function LoginScreen() {
                     <Text style={styles.dividerText}>or</Text>
                     <View style={styles.dividerLine} />
                 </View>
-
                 <Pressable
-                    style={styles.socialButton}
+                    style={[styles.socialButton, isLoading && styles.buttonDisabled]}
                     onPress={handleGoogleLogin}
+                    disabled={isLoading}
                 >
-                    <Image
-                        source={require('@/assets/images/google.png')}
-                        style={styles.socialIcon}
-                    />
-                    <Text style={styles.socialButtonText}>Continue with Google</Text>
+                    {isLoading ? (
+                        <ActivityIndicator color="#000" />
+                    ) : (
+                        <>
+                            <Image
+                                source={require('@/assets/images/google.png')}
+                                style={styles.socialIcon}
+                            />
+                            <Text style={styles.socialButtonText}>Continue with Google</Text>
+                        </>
+                    )}
                 </Pressable>
-
                 <View style={styles.footer}>
                     <Text style={styles.footerText}>Don't have an account? </Text>
                     <Link href="/auth/signup" style={styles.link}>
